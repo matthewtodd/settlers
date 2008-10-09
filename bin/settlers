@@ -4,59 +4,51 @@ class Jar
     @path = path
   end
 
-  def fork(*args)
-    Kernel.fork { exec *command(args) }
-  end
-
-  def run(*args)
-    system *command(args)
+  def command(*args)
+    ['java', '-cp', full_path] + args.map { |arg| arg.to_s }
   end
 
   private
-
-  def command(args)
-    ['java', '-cp', full_path] + args.map { |arg| arg.to_s }
-  end
 
   def full_path
     File.expand_path(File.join(File.dirname(__FILE__), '..', 'resources', 'jsettlers-1.0.6', @path))
   end
 end
 
-class Game
-  def initialize(host='localhost', port=8880)
-    @host, @port = host, port
+class Runner
+  def initialize
     @pids = []
   end
 
-  def play
-    launch_server
-    launch_robots
-    launch_player
+  def background
+    @pids.unshift fork { exec *yield }
+  end
 
-    clean_up_processes
+  def foreground
+    system *yield
+  end
+
+  def clean_up
+    Process.kill 'INT', *@pids
+  end
+end
+
+class Game
+  def initialize(host='localhost', port=8880)
+    @host, @port = host, port
+    @runner = Runner.new
+  end
+
+  def play
+    @runner.background { server.command('soc.server.SOCServer', @port, 4, 'root', '') }; sleep 5
+    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Leonardo', '') }
+    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Humperdink', '') }
+    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Elwood', '') }
+    @runner.foreground { client.command('soc.client.SOCPlayerClient', @host, @port) }
+    @runner.clean_up
   end
 
   private
-
-  def launch_server
-    @pids.unshift server.fork('soc.server.SOCServer', @port, 10, 'root', '')
-    sleep 5
-  end
-
-  def launch_robots
-    3.times do |num|
-      @pids.unshift server.fork('soc.robot.SOCRobotClient', @host, @port, "Robot#{num}", '')
-    end
-  end
-
-  def launch_player
-    client.run('soc.client.SOCPlayerClient', @host, @port)
-  end
-
-  def clean_up_processes
-    Process.kill 'INT', *@pids
-  end
 
   def server
     Jar.new('JSettlersServer.jar')
