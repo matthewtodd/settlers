@@ -1,30 +1,34 @@
-#! /bin/bash
+#!/usr/bin/env ruby
+class Resource
+  def initialize(path)
+    @path = path
+  end
 
-JSettlersDir="/usr/local/jsettlers-1.0.6"
-NUM_PLAYERS=3
+  def to_s
+    File.expand_path(File.join(File.dirname(__FILE__), '..', 'resources', 'jsettlers-1.0.6', @path))
+  end
+end
 
-#if ! [ -e /var/run/mysqld/mysqld.sock ]; then
-	#sudo mysqld &
-#fi
+system "java -jar #{Resource.new('JSettlersServer.jar')} 8880 10 root '' &"
+server_pid = $?.pid
+puts "Server PID: #{server_pid}"
+sleep 5
 
-java -jar ${JSettlersDir}/JSettlersServer.jar 8880 10 root "" &
-server_proc_id=$!
-echo "Server Process ID: $server_proc_id"
+robot_pids = {}
+3.times do |robot_number|
+  system "java -cp #{Resource.new('JSettlersServer.jar')} soc.robot.SOCRobotClient localhost 8880 Robot#{robot_number} '' &"
+  robot_pids[robot_number] = $?.pid
+  puts "Robot#{robot_number} PID: #{robot_pids[robot_number]}"
+end
 
-sleep 5s
+system "java -jar #{Resource.new('JSettlers.jar')} localhost 8880"
 
-for ((num=1; num<=NUM_PLAYERS; num++)); do
-	java -cp ${JSettlersDir}/JSettlersServer.jar soc.robot.SOCRobotClient localhost 8880 "Computer"${num} "" &
-	CATANID[$num]=$!
-	echo "Computer${num} Process ID: ${CATANID[$num]}"
-done
+robot_pids.each do |robot_number, pid|
+  puts "Cleaning up: killing Robot#{robot_number}"
+  system "kill #{pid}"
+end
 
-java -jar ${JSettlersDir}/JSettlers.jar localhost 8880
-
-for ((num=1; num<=NUM_PLAYERS; num++)); do
-	echo "Cleaning up: killing ${CATANID[$num]}"
-	kill ${CATANID[$num]};
-done
-echo "Cleaning up: killing $server_proc_id"; kill $server_proc_id;
+puts "Cleaning up: killing Server"
+system "kill #{server_pid}"
 
 exit 0
