@@ -1,63 +1,6 @@
 #!/usr/bin/env ruby
 
-class Jar
-  def initialize(path)
-    @path = path
-  end
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'settlers'
 
-  def command(*args)
-    ['java', '-cp', full_path] + args.map { |arg| arg.to_s }
-  end
-
-  private
-
-  def full_path
-    File.expand_path(File.join(File.dirname(__FILE__), '..', 'resources', 'jsettlers-1.0.6', @path))
-  end
-end
-
-class Runner
-  def initialize
-    @pids = []
-  end
-
-  def background
-    @pids.unshift fork { exec *yield }
-  end
-
-  def foreground
-    system *yield
-  end
-
-  def clean_up
-    Process.kill 'INT', *@pids
-  end
-end
-
-class Game
-  def initialize(host='localhost', port=8880)
-    @host, @port = host, port
-    @runner = Runner.new
-  end
-
-  def play
-    @runner.background { server.command('soc.server.SOCServer', @port, 4, 'root', '') }; sleep 5
-    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Leonardo', '') }
-    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Humperdink', '') }
-    @runner.background { server.command('soc.robot.SOCRobotClient', @host, @port, 'Elwood', '') }
-    @runner.foreground { client.command('soc.client.SOCPlayerClient', @host, @port) }
-    @runner.clean_up
-  end
-
-  private
-
-  def server
-    Jar.new('JSettlersServer.jar')
-  end
-
-  def client
-    Jar.new('JSettlers.jar')
-  end
-end
-
-Game.new.play
+Settlers::Game.new.play
