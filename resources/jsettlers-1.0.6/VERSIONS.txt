@@ -1,0 +1,50 @@
+[ The list of the different public versions of JSettlers ]
+
+    > 1.0.6 (build 2004-11-17)
+
+- Fixed the same PORT property error in the Account client
+- Fixed bug which could allow modified clients to invoke admin
+  commands (*STOP*, *KILLCHANNEL*, etc) (Lasse Vartiainen)
+- Fixed 920375, 1022157: mysql-connector-3.x fails: version 2.x works
+  (Mezryn)
+- Fixed 1060651: Bots crash if database backend is used (Jack Twilley)
+- Moved more SQL error handling and reconnecting from SOCServer to
+  SOCDBHelper correcting potential errors like 1060651
+
+    > 1.0.5 (build 2004-06-12)
+
+- Fixed an error introduced into the applet initialization which kept
+  the PORT property from being read properly
+
+    > 1.0.4 (build 2004-06-10)
+
+- build.xml file added for Ant builds
+- soc.util.Version class added so both build files and source code get
+  version and copyright info from build.xml. Clients and server updated
+- Build process creates two jar files: one for client, one for server
+- README updated for jar file invocation, with additional sections for
+  intro, requirements, hosting a server, and development
+- Fix for inconsistent game state when players leave a game.
+- Divider in chat window cannot be moved off-screen
+- Text of game chat now correctly scrolls to bottom of text.
+- Rewrite of much of the display code to address continuing display
+  issues. Methods which directly manipulate GUI components can cause
+  race conditions, and are now never called from main networking
+  thread.
+- Removed calls to deprecated methods
+- Images can now be loaded from files (on server or not) or from
+  within jar.
+
+    > 1.0.3 (build 2004-03-29)
+
+- Continuing to fix the display bug in the SOCPlayerClient
+
+    > 1.0.2 (build 2004-03-26)
+
+- Fixed display bug (again) in the SOCPlayerClient when run as a stand
+  alone.
+
+    > 1.0 (build 2004-03-14)
+
+- First release. See the README file for how to setup a server and
+  robot clients.
