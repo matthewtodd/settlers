@@ -5,7 +5,7 @@ module Settlers
     end
 
     def command(*args)
-      ['java', '-cp', full_path] + args.map { |arg| arg.to_s }
+      ['java', '-cp', full_path] + args
     end
 
     private
