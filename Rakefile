@@ -2,7 +2,7 @@ require 'rubygems'
 
 spec = Gem::Specification.new do |s|
   s.name             = 'settlers'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = "Provides a simple command-line executable for playing Robb Thomas' JSettlers game."
   s.files            = FileList['[A-Z]*', 'bin/*', 'lib/**/*.rb', 'resources/**/*']
   s.executables      = ['settlers']
