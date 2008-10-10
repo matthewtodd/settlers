@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'rake/gempackagetask'
 
 spec = Gem::Specification.new do |s|
   s.name             = 'settlers'
@@ -10,14 +9,6 @@ spec = Gem::Specification.new do |s|
   s.author           = 'Matthew Todd'
   s.email            = 'matthew.todd@gmail.com'
 end
-
-Rake::GemPackageTask.new spec do |pkg|
-  pkg.need_tar = true
-  pkg.need_zip = true
-end
-
-desc 'Remove all generated artifacts.'
-task :clobber => :clobber_package
 
 desc 'Generate a gemspec file'
 task :gemspec do
