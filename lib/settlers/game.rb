@@ -3,17 +3,18 @@ module Settlers
     DEFAULT_PORT = 8880
     MAXIMUM_SERVER_CONNECTIONS = 4
     SERVER_STARTUP_DELAY = 2
+    NO_PASSWORD = "''"
 
     def initialize(port=DEFAULT_PORT)
-      @host, @port, @runner = 'localhost', port, Runner.new
+      @host, @port = 'localhost', port
     end
 
     def play
-      @runner.background server.with(@port, MAXIMUM_SERVER_CONNECTIONS, 'root', "''"); sleep SERVER_STARTUP_DELAY
-      @runner.background robot.with(@host, @port, 'Leonardo', "''")
-      @runner.background robot.with(@host, @port, 'Humperdink', "''")
-      @runner.background robot.with(@host, @port, 'Elwood', "''")
-      @runner.foreground human.with(@host, @port)
+      server.start(@port, MAXIMUM_SERVER_CONNECTIONS, 'root', NO_PASSWORD); sleep SERVER_STARTUP_DELAY
+      robot.start(@host, @port, 'Leonardo', NO_PASSWORD)
+      robot.start(@host, @port, 'Humperdink', NO_PASSWORD)
+      robot.start(@host, @port, 'Elwood', NO_PASSWORD)
+      human.run(@host, @port)
     end
 
     private

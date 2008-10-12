@@ -4,7 +4,18 @@ module Settlers
       @class_path, @class_name = class_path, class_name
     end
 
-    def with(*args)
+    def run(*args)
+      system command(args)
+    end
+
+    def start(*args)
+      pid = fork { exec command(args) }
+      at_exit { Process.kill 'INT', pid }
+    end
+
+    private
+
+    def command(args)
       "java -cp #{@class_path} #{@class_name} #{args.join(' ')}"
     end
   end
