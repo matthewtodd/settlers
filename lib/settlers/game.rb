@@ -10,7 +10,6 @@ module Settlers
       @runner.background robot.with(@host, @port, 'Humperdink', "''")
       @runner.background robot.with(@host, @port, 'Elwood', "''")
       @runner.foreground client.with(@host, @port)
-      @runner.clean_up
     end
 
     private
