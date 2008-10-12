@@ -5,22 +5,26 @@ module Settlers
     end
 
     def play
-      @runner.background server.command('soc.server.SOCServer', @port, 4, 'root', "''"); sleep @server_delay.to_i
-      @runner.background server.command('soc.robot.SOCRobotClient', @host, @port, 'Leonardo', "''")
-      @runner.background server.command('soc.robot.SOCRobotClient', @host, @port, 'Humperdink', "''")
-      @runner.background server.command('soc.robot.SOCRobotClient', @host, @port, 'Elwood', "''")
-      @runner.foreground client.command('soc.client.SOCPlayerClient', @host, @port)
+      @runner.background server.with(@port, 4, 'root', "''"); sleep @server_delay.to_i
+      @runner.background robot.with(@host, @port, 'Leonardo', "''")
+      @runner.background robot.with(@host, @port, 'Humperdink', "''")
+      @runner.background robot.with(@host, @port, 'Elwood', "''")
+      @runner.foreground client.with(@host, @port)
       @runner.clean_up
     end
 
     private
 
     def server
-      Jar.new('JSettlersServer.jar')
+      Jar.new('JSettlersServer.jar').run('soc.server.SOCServer')
+    end
+
+    def robot
+      Jar.new('JSettlersServer.jar').run('soc.robot.SOCRobotClient')
     end
 
     def client
-      Jar.new('JSettlers.jar')
+      Jar.new('JSettlers.jar').run('soc.client.SOCPlayerClient')
     end
   end
 end
