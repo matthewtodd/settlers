@@ -1,11 +1,11 @@
 module Settlers
   class Game
-    def initialize(port=8880, server_delay=2)
-      @host, @port, @server_delay, @runner = 'localhost', port, server_delay, Runner.new
+    def initialize(port=8880)
+      @host, @port, @runner = 'localhost', port, Runner.new
     end
 
     def play
-      @runner.background server.with(@port, 4, 'root', "''"); sleep @server_delay.to_i
+      @runner.background server.with(@port, 4, 'root', "''"); sleep 2
       @runner.background robot.with(@host, @port, 'Leonardo', "''")
       @runner.background robot.with(@host, @port, 'Humperdink', "''")
       @runner.background robot.with(@host, @port, 'Elwood', "''")
@@ -15,15 +15,15 @@ module Settlers
     private
 
     def server
-      Jar.new('JSettlersServer.jar').run('soc.server.SOCServer')
+      Jar.new('JSettlersServer.jar').running('soc.server.SOCServer')
     end
 
     def robot
-      Jar.new('JSettlersServer.jar').run('soc.robot.SOCRobotClient')
+      Jar.new('JSettlersServer.jar').running('soc.robot.SOCRobotClient')
     end
 
     def client
-      Jar.new('JSettlers.jar').run('soc.client.SOCPlayerClient')
+      Jar.new('JSettlers.jar').running('soc.client.SOCPlayerClient')
     end
   end
 end
