@@ -5,7 +5,7 @@ module Settlers
     end
 
     def command(*args)
-      ['java', '-cp', full_path] + args
+      "java -cp #{full_path} #{args.join(' ')}"
     end
 
     private
