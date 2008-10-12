@@ -1,5 +1,5 @@
 module Settlers
-  class Java
+  class JavaCommand
     def initialize(class_path, class_name)
       @class_path, @class_name = class_path, class_name
     end
