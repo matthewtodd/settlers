@@ -104,11 +104,13 @@ module Settlers
       end
 
       def serve
+        # TODO move the Shellwords.escape call inside of JavaCommand.start
         Jar.new('JSettlersServer.jar').running('soc.server.SOCServer').start(port, maximum_connections, username, Shellwords.escape(password))
       end
 
       def start_robots
         robot_names.each do |name|
+          # TODO move the Shellwords.escape call inside of JavaCommand.start
           Jar.new('JSettlersServer.jar').running('soc.robot.SOCRobotClient').start(host, port, name, Shellwords.escape(password))
         end
       end
