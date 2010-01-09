@@ -1,0 +1,18 @@
+= settlers
+
+Play Settlers of Catan on your computer. You know you want to.
+
+All the hard work here was part of Robb Thomas'
+JSettlers[http://jsettlers.sf.net] project; I just wrapped his code with a
+handy shell script.
+
+== Behold
+
+ settlers            # launches a game -- a server and a client connected to it
+
+ settlers --client   # browses for a server to connect to
+
+== Install
+
+ gem install settlers
+
