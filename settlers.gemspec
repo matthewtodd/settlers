@@ -2,17 +2,19 @@
 
 Gem::Specification.new do |s|
   s.name = %q{settlers}
-  s.version = "0.2.0"
+  s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Matthew Todd"]
-  s.date = %q{2009-05-02}
+  s.date = %q{2010-01-09}
   s.default_executable = %q{settlers}
   s.email = %q{matthew.todd@gmail.com}
   s.executables = ["settlers"]
-  s.files = ["Rakefile", "bin/settlers", "lib/settlers/application.rb", "lib/settlers/jar.rb", "lib/settlers/java_command.rb", "lib/settlers.rb", "resources/jsettlers-1.0.6", "resources/jsettlers-1.0.6/COPYING.txt", "resources/jsettlers-1.0.6/JSettlers.jar", "resources/jsettlers-1.0.6/JSettlersServer.jar", "resources/jsettlers-1.0.6/README.txt", "resources/jsettlers-1.0.6/VERSIONS.txt"]
+  s.extra_rdoc_files = ["README.rdoc"]
+  s.files = ["Rakefile", "settlers.gemspec", "README.rdoc", "bin/settlers", "lib/settlers", "lib/settlers/application.rb", "lib/settlers/jar.rb", "lib/settlers/java_command.rb", "lib/settlers.rb", "resources/jsettlers-1.0.6", "resources/jsettlers-1.0.6/COPYING.txt", "resources/jsettlers-1.0.6/JSettlers.jar", "resources/jsettlers-1.0.6/JSettlersServer.jar", "resources/jsettlers-1.0.6/README.txt", "resources/jsettlers-1.0.6/VERSIONS.txt"]
+  s.rdoc_options = ["--main", "README.rdoc", "--title", "settlers-0.2.1", "--inline-source"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.2}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Provides a simple command-line executable for playing Robb Thomas' JSettlers game.}
 
   if s.respond_to? :specification_version then
@@ -20,13 +22,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
+      s.add_development_dependency(%q<shoe>, [">= 0"])
       s.add_runtime_dependency(%q<dnssd>, [">= 0"])
       s.add_runtime_dependency(%q<highline>, [">= 0"])
     else
+      s.add_dependency(%q<shoe>, [">= 0"])
       s.add_dependency(%q<dnssd>, [">= 0"])
       s.add_dependency(%q<highline>, [">= 0"])
     end
   else
+    s.add_dependency(%q<shoe>, [">= 0"])
     s.add_dependency(%q<dnssd>, [">= 0"])
     s.add_dependency(%q<highline>, [">= 0"])
   end
