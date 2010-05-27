@@ -1,0 +1,31 @@
+--- 
+dependencies: 
+  shoe: 
+    group: 
+    - :development
+    version: ">= 0"
+  highline: 
+    group: 
+    - :default
+    version: ">= 0"
+  dnssd: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- rake: 
+    version: 0.8.7
+- configuration: 
+    version: 1.1.0
+- dnssd: 
+    version: 1.3.1
+- highline: 
+    version: 1.5.2
+- launchy: 
+    version: 0.3.5
+- shoe: 
+    version: 0.6.2
+hash: 0026d41e9ab1428787b4fbef9390d634b6a220bf
+sources: 
+- Rubygems: 
+    uri: http://rubygems.org/

@@ -1,6 +1,18 @@
 #!/usr/bin/env ruby
 
-$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'settlers'
+begin
+  require 'settlers'
+rescue LoadError
+  raise unless $!.message =~ /\bsettlers$/
+
+  lib = File.expand_path('../../lib', __FILE__)
+  if !$:.include?(lib)
+    warn "#{$!}. Trying again with #{lib} on the $LOAD_PATH."
+    $:.unshift(lib)
+    retry
+  end
+
+  raise
+end
 
 Settlers::Application.new(*ARGV).run

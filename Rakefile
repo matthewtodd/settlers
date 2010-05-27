@@ -1,10 +1,3 @@
-begin
-  require 'shoe'
-rescue LoadError
-  abort 'Please `gem install shoe` to get started.'
-end
+require 'shoe'
 
-Shoe.tie('settlers', '0.2.1', "Provides a simple command-line executable for playing Robb Thomas' JSettlers game.") do |spec|
-  spec.add_dependency 'dnssd'
-  spec.add_dependency 'highline'
-end
+Shoe::Tasks.define('settlers.gemspec')

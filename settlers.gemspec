@@ -1,38 +1,33 @@
-# -*- encoding: utf-8 -*-
+require 'bundler'
+$:.unshift File.expand_path('../lib', __FILE__)
+require 'settlers'
 
-Gem::Specification.new do |s|
-  s.name = %q{settlers}
-  s.version = "0.2.1"
+# Feel free to change whatever you like! This file is yours now.
+Gem::Specification.new do |spec|
+  spec.name    = 'settlers'
+  spec.version = Settlers::VERSION
 
-  s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Matthew Todd"]
-  s.date = %q{2010-01-09}
-  s.default_executable = %q{settlers}
-  s.email = %q{matthew.todd@gmail.com}
-  s.executables = ["settlers"]
-  s.extra_rdoc_files = ["README.rdoc"]
-  s.files = ["Rakefile", "settlers.gemspec", "README.rdoc", "bin/settlers", "lib/settlers", "lib/settlers/application.rb", "lib/settlers/jar.rb", "lib/settlers/java_command.rb", "lib/settlers.rb", "resources/jsettlers-1.0.6", "resources/jsettlers-1.0.6/COPYING.txt", "resources/jsettlers-1.0.6/JSettlers.jar", "resources/jsettlers-1.0.6/JSettlersServer.jar", "resources/jsettlers-1.0.6/README.txt", "resources/jsettlers-1.0.6/VERSIONS.txt"]
-  s.rdoc_options = ["--main", "README.rdoc", "--title", "settlers-0.2.1", "--inline-source"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
-  s.summary = %q{Provides a simple command-line executable for playing Robb Thomas' JSettlers game.}
+  spec.summary = "Provides a simple command-line executable for playing Robb Thomas' JSettlers game."
 
-  if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 3
+  spec.author = 'Matthew Todd'
+  spec.email  = 'matthew.todd@gmail.com'
+  spec.homepage = 'http://github.com/matthewtodd/settlers'
 
-    if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
-      s.add_development_dependency(%q<shoe>, [">= 0"])
-      s.add_runtime_dependency(%q<dnssd>, [">= 0"])
-      s.add_runtime_dependency(%q<highline>, [">= 0"])
-    else
-      s.add_dependency(%q<shoe>, [">= 0"])
-      s.add_dependency(%q<dnssd>, [">= 0"])
-      s.add_dependency(%q<highline>, [">= 0"])
-    end
-  else
-    s.add_dependency(%q<shoe>, [">= 0"])
-    s.add_dependency(%q<dnssd>, [">= 0"])
-    s.add_dependency(%q<highline>, [">= 0"])
-  end
+  spec.add_bundler_dependencies
+
+  # The kooky &File.method(:basename) trick keeps us from accidentally
+  # shadowing a variable named "file" in the context that evaluates this
+  # gemspec. I actually ran into this problem with Bundler!
+  spec.files            = Dir['**/*.rdoc', 'bin/*', 'data/**/*', 'ext/**/*.{rb,c}', 'lib/**/*.rb', 'man/**/*', 'test/**/*.rb']
+  spec.executables      = Dir['bin/*'].map &File.method(:basename)
+  spec.extensions       = Dir['ext/**/extconf.rb']
+  spec.extra_rdoc_files = Dir['**/*.rdoc', 'ext/**/*.c']
+  spec.test_files       = Dir['test/**/*_test.rb']
+
+  spec.rdoc_options = %W(
+    --main README.rdoc
+    --title #{spec.full_name}
+    --inline-source
+    --webcvs http://github.com/matthewtodd/settlers/blob/v#{spec.version}/
+  )
 end

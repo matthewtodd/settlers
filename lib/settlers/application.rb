@@ -2,7 +2,6 @@ require 'optparse'
 require 'set'
 require 'shellwords'
 
-require 'rubygems'
 require 'dnssd'
 require 'highline/import'
 
