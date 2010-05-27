@@ -1,3 +1,5 @@
+require 'shellwords'
+
 module Settlers
   class JavaCommand
     def initialize(class_path, class_name)
@@ -16,7 +18,7 @@ module Settlers
     private
 
     def command(args)
-      "java -cp #{@class_path} #{@class_name} #{args.join(' ')}"
+      "java -cp #{@class_path} #{@class_name} #{args.map { |arg| Shellwords.escape(arg.to_s) }.join(' ')}"
     end
   end
 end

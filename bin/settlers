@@ -15,4 +15,4 @@ rescue LoadError
   raise
 end
 
-Settlers::Application.new(*ARGV).run
+Settlers::Application.new.run(ARGV)
