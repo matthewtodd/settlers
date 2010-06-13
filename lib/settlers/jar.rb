@@ -11,7 +11,7 @@ module Settlers
     private
 
     def full_path
-      Settlers.datadir.join('jsettlers-1.0.6', @path)
+      Settlers.datadir.join('jsettlers-1.1.09', @path)
     end
   end
 end
