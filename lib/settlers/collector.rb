@@ -5,33 +5,19 @@ module Settlers
     include Enumerable
 
     def initialize
-      @servers = Set.new
+      @addresses = Set.new
     end
 
-    def update(name, host, port)
-      @servers << Address.new(name, host, port)
+    def update(address)
+      @addresses.add(address)
     end
 
     def each(&block)
-      @servers.sort.each(&block)
+      @addresses.sort.each(&block)
     end
 
     def size
-      @servers.size
-    end
-
-    private
-
-    class Address < Struct.new(:name, :host, :port)
-      include Comparable
-
-      def <=>(other)
-        name <=> other.name
-      end
-
-      def to_s
-        "#{name} (#{host}:#{port})"
-      end
+      @addresses.size
     end
   end
 end

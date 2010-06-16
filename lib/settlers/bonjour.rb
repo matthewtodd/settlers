@@ -7,8 +7,8 @@ module Settlers
 
     include Observable
 
-    def update(name, host, port)
-      DNSSD.register(name, TYPE, nil, port)
+    def update(address)
+      DNSSD.register(address.name, TYPE, nil, address.port)
     end
 
     def start
@@ -17,7 +17,7 @@ module Settlers
         DNSSD.resolve(browse) do |reply|
           DNSSD.getaddrinfo!(reply.target, DNSSD::Service::IPv4) do |info|
             changed
-            notify_observers(reply.name, info.address, reply.port)
+            notify_observers Address.new(reply.name, info.address, reply.port)
           end
         end
       end

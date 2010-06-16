@@ -1,12 +1,11 @@
 module Settlers
   class Client
-    def initialize(host, port)
-      @host = host
-      @port = port
+    def initialize(address)
+      @address = address
     end
 
     def start
-      Java.client.run(@host, @port)
+      Java.client.run(@address.host, @address.port)
     end
   end
 end

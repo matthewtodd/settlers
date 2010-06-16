@@ -7,14 +7,12 @@ module Settlers
     end
 
     def choose_server(list)
-      address = case list.size
-                when 1
-                  list.first
-                else
-                  choose_from_many(list)
-                end
-
-      yield address.host, address.port
+      yield case list.size
+            when 1
+              list.first
+            else
+              choose_from_many(list)
+            end
     end
 
     private

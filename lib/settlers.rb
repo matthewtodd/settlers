@@ -5,6 +5,7 @@ require 'rbconfig/datadir'
 module Settlers
   VERSION = '0.2.1'
 
+  autoload :Address,     'settlers/address'
   autoload :Application, 'settlers/application'
   autoload :Bonjour,     'settlers/bonjour'
   autoload :Client,      'settlers/client'
