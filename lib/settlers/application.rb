@@ -20,12 +20,12 @@ module Settlers
       discovery.start
 
       server = Server.new(@port)
+      server.add_observer(@collection)
       server.add_observer(discovery)
       server.start
 
       @ui.choose_server(@collection) do |host, port|
-        client = Client.new(host, port)
-        client.start
+        Client.new(host, port).start
       end
     end
 
