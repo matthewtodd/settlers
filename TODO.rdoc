@@ -1,5 +1,0 @@
-* Squelch all the new JSettlers output.
-
-* DNSSD doesn't find a server running on 127.0.0.1; either find out why, or
-  re-work the available servers code so that we don't need to use DNSSD to
-  discover ourself!
