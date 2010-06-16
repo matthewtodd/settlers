@@ -13,13 +13,13 @@ module Settlers
     def run(args)
       @options.parse(args)
 
-      discovery = Discovery.new
-      discovery.add_observer(@collection)
-      discovery.start
+      bonjour = Bonjour.new
+      bonjour.add_observer(@collection)
+      bonjour.start
 
       server = Server.new(@port)
       server.add_observer(@collection)
-      server.add_observer(discovery)
+      server.add_observer(bonjour)
       server.start
 
       @ui.choose_server(@collection) do |host, port|

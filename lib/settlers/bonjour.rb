@@ -2,7 +2,7 @@ require 'dnssd'
 require 'observer'
 
 module Settlers
-  class Discovery
+  class Bonjour
     TYPE = '_settlers._tcp'
 
     include Observable

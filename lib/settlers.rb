@@ -6,8 +6,8 @@ module Settlers
   VERSION = '0.2.1'
 
   autoload :Application,      'settlers/application'
+  autoload :Bonjour,          'settlers/bonjour'
   autoload :Client,           'settlers/client'
-  autoload :Discovery,        'settlers/discovery'
   autoload :Java,             'settlers/java'
   autoload :Server,           'settlers/server'
   autoload :ServerCollection, 'settlers/server_collection'
