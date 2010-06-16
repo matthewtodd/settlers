@@ -35,8 +35,14 @@ module Settlers
       end
 
       def choose_server(list)
-        address = @console.choose(*list)
-        yield address.host, address.port
+        begin
+          address = @console.choose(*list)
+        rescue Interrupt
+          puts
+          puts 'Goodbye.'
+        else
+          yield address.host, address.port
+        end
       end
     end
   end
