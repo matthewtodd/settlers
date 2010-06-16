@@ -16,6 +16,10 @@ module Settlers
       @servers.sort.each(&block)
     end
 
+    def size
+      @servers.size
+    end
+
     private
 
     class Address < Struct.new(:name, :host, :port)

@@ -35,13 +35,23 @@ module Settlers
       end
 
       def choose_server(list)
+        address = case list.size
+                  when 1
+                    list.first
+                  else
+                    choose_from_many(list)
+                  end
+
+        yield address.host, address.port
+      end
+
+      private
+
+      def choose_from_many(list)
         begin
-          address = @console.choose(*list)
+          @console.choose(*list)
         rescue Interrupt
-          puts
-          puts 'Goodbye.'
-        else
-          yield address.host, address.port
+          abort "\nGoodbye."
         end
       end
     end
