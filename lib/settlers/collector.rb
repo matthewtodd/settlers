@@ -1,7 +1,7 @@
 require 'set'
 
 module Settlers
-  class ServerCollection
+  class Collector
     include Enumerable
 
     def initialize

@@ -1,13 +1,12 @@
 module Settlers
   class Application
+    PORT = 8880
+
     def initialize
-      @bonjour    = Bonjour.new
-      @collection = ServerCollection.new
-      @ui         = UserInteraction.new
+      @bonjour   = Bonjour.new
+      @collector = Collector.new
+      @ui        = UI.new
 
-      @bonjour.add_observer(@collection)
-
-      @port = 8880
       @options = OptionParser.new do |opts|
         opts.version = Settlers::VERSION
       end
@@ -15,14 +14,15 @@ module Settlers
 
     def run(args)
       @options.parse(args)
+      @bonjour.add_observer(@collector)
       @bonjour.start
 
-      server = Server.new(@port)
-      server.add_observer(@collection)
+      server = Server.new(PORT)
       server.add_observer(@bonjour)
+      server.add_observer(@collector)
       server.start
 
-      @ui.choose_server(@collection) do |host, port|
+      @ui.choose_server(@collector) do |host, port|
         Client.new(host, port).start
       end
     end

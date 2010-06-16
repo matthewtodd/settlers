@@ -5,13 +5,13 @@ require 'rbconfig/datadir'
 module Settlers
   VERSION = '0.2.1'
 
-  autoload :Application,      'settlers/application'
-  autoload :Bonjour,          'settlers/bonjour'
-  autoload :Client,           'settlers/client'
-  autoload :Java,             'settlers/java'
-  autoload :Server,           'settlers/server'
-  autoload :ServerCollection, 'settlers/server_collection'
-  autoload :UserInteraction,  'settlers/user_interaction'
+  autoload :Application, 'settlers/application'
+  autoload :Bonjour,     'settlers/bonjour'
+  autoload :Client,      'settlers/client'
+  autoload :Collector,   'settlers/collector'
+  autoload :Java,        'settlers/java'
+  autoload :Server,      'settlers/server'
+  autoload :UI,          'settlers/ui'
 
   def self.datadir
     @@datadir ||= begin

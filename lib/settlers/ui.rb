@@ -1,7 +1,7 @@
 require 'highline'
 
 module Settlers
-  class UserInteraction
+  class UI
     def initialize
       @console = HighLine.new
     end
