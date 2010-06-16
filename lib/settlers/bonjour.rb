@@ -12,6 +12,7 @@ module Settlers
     end
 
     def start
+      puts 'Looking for servers nearby...'
       DNSSD.browse(TYPE) do |browse|
         DNSSD.resolve(browse) do |reply|
           DNSSD.getaddrinfo!(reply.target, DNSSD::Service::IPv4) do |info|
