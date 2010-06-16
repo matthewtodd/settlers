@@ -19,18 +19,25 @@ module Settlers
     end
 
     def run(*args)
-      system *command(args)
+      pid = quietly_fork(args)
+      Process.waitpid(pid)
     end
 
     def start(*args)
-      pid = fork { exec *command(args) }
+      pid = quietly_fork(args)
       at_exit { Process.kill 'INT', pid }
     end
 
     private
 
-    def command(args)
-      ['java', '-cp', JAR, @class_name].concat(args.map { |arg| arg.to_s })
+    def quietly_fork(args)
+      args.map! { |arg| arg.to_s }
+
+      fork do
+        STDOUT.reopen '/dev/null'
+        STDERR.reopen '/dev/null'
+        exec 'java', '-cp', JAR, @class_name, *args
+      end
     end
   end
 end
