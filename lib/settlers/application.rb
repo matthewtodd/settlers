@@ -10,6 +10,10 @@ module Settlers
 
       @options = OptionParser.new do |opts|
         opts.version = Settlers::VERSION
+
+        opts.on('-V', '--verbose') do
+          @ui = UI::Verbose.new
+        end
       end
     end
 
