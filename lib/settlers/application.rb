@@ -1,6 +1,5 @@
 module Settlers
   class Application
-    NAME = "#{`whoami`.chomp}@#{`hostname`.chomp}"
     PORT = 8880
 
     def initialize
@@ -22,7 +21,7 @@ module Settlers
       @bonjour.add_observer(@collector)
       @bonjour.start
 
-      server = Server.new(NAME, PORT)
+      server = Server.new(PORT)
       server.add_observer(@bonjour)
       server.add_observer(@collector)
       server.start
