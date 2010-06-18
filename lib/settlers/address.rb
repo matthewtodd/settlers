@@ -1,3 +1,5 @@
+require 'ipaddr'
+
 module Settlers
   class Address < Struct.new(:name, :host, :port)
     include Comparable
@@ -7,7 +9,11 @@ module Settlers
     end
 
     def <=>(other)
-      name <=> other.name
+      [name, ip, port] <=> [other.name, other.ip, other.port]
+    end
+
+    def ip
+      IPAddr.new(host)
     end
 
     def to_s
