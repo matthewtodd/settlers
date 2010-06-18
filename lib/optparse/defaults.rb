@@ -18,20 +18,18 @@ class OptionParser
   #
   #   parser.order(ARGV)
   module Defaults
-    attr_reader :defaults
-
     def defaults=(defaults)
       @defaults = defaults.extend(Arguments)
     end
 
     def order(*args, &block)
-      super(*defaults.followed_by(*args), &block)
+      super(*@defaults.followed_by(*args), &block)
     rescue ParseError
       abort($!)
     end
 
     def help
-      defaults.help(super, summary_indent)
+      @defaults.help(super, summary_indent)
     end
 
     private
