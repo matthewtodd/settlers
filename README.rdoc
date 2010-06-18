@@ -9,9 +9,8 @@ shell script, adding basic Bonjour support.
 
 == Behold
 
- settlers            # launches a game -- a server and a client connected to it
-
- settlers --client   # browses for a server to connect to
+ settlers            # Launch, announce, and connect to a game server.
+ settlers --client   # Discover and connect to a game server.
 
 == Install
 
