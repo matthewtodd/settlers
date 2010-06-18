@@ -8,6 +8,8 @@ module Settlers
 
     def choose_server(list)
       yield case list.size
+            when 0
+              abort 'No servers to choose from.'
             when 1
               list.first
             else
