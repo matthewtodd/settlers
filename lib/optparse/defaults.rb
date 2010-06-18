@@ -11,8 +11,7 @@ class OptionParser
   # <tt>POSIX</tt>-ly correct semantics.)
   #
   # To use:
-  #   parser = OptionsParser.new do |opts|
-  #              opts.extend(OptionParser::Defaults)
+  #   parser = OptionsParser.with_defaults do |opts|
   #              opts.defaults = %w(--foo --no-bar --baz=42)
   #              # ... and so on ...
   #            end
@@ -45,6 +44,13 @@ class OptionParser
       def help(before, indent)
         "#{before}\nDefaults:\n#{indent}#{join ' '}"
       end
+    end
+  end
+
+  def self.with_defaults(*args)
+    new(*args) do |instance|
+      instance.extend(Defaults)
+      yield instance if block_given?
     end
   end
 end

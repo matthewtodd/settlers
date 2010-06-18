@@ -8,9 +8,7 @@ module Settlers
       @collector = Collector.new
       @ui        = UI.new
 
-      @options = OptionParser.new do |opts|
-        opts.extend(OptionParser::Defaults)
-
+      @options = OptionParser.with_defaults do |opts|
         opts.banner  = "Usage: #{File.basename($0)} [--client]"
         opts.defaults = %w(--server)
         opts.separator ''
