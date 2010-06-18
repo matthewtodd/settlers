@@ -21,12 +21,12 @@ module Settlers
       end
     end
 
-    def name
-      login    = Etc.getlogin
-      name     = Etc.getpwnam(login).gecos
-      hostname = Socket.gethostname
+    private
 
-      "#{name} <#{login}@#{hostname}>"
+    def name
+      login = Etc.getlogin
+      name  = Etc.getpwnam(login).gecos
+      "#{name}'s Settlers Server"
     end
   end
 end
