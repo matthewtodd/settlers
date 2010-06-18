@@ -15,12 +15,6 @@ module Settlers
             end
     end
 
-    class Verbose < UI
-      def choose_server(list)
-        yield choose_from_many(list)
-      end
-    end
-
     private
 
     def choose_from_many(list)
