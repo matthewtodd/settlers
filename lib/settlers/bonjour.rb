@@ -6,8 +6,9 @@ module Settlers
     TYPE = '_settlers._tcp'
 
     include Observable
+    include Observer
 
-    def update(address)
+    def server_exists_at(address)
       DNSSD.register(address.name, TYPE, nil, address.port)
     end
 
@@ -17,7 +18,7 @@ module Settlers
         DNSSD.resolve(browse) do |reply|
           DNSSD.getaddrinfo!(reply.target, DNSSD::Service::IPv4) do |info|
             changed
-            notify_observers Address.new(reply.name, info.address, reply.port)
+            notify_observers :server_exists_at, Address.from(reply, info)
           end
         end
       end

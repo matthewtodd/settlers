@@ -11,9 +11,8 @@ module Settlers
 
     def start
       Java.server.start(@address.port, 10, 'root', '')
-
       changed
-      notify_observers @address
+      notify_observers :server_exists_at, @address
 
       sleep 5
 

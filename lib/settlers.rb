@@ -11,6 +11,7 @@ module Settlers
   autoload :Client,      'settlers/client'
   autoload :Collector,   'settlers/collector'
   autoload :Java,        'settlers/java'
+  autoload :Observer,    'settlers/observer'
   autoload :Server,      'settlers/server'
   autoload :UI,          'settlers/ui'
 

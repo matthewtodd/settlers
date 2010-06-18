@@ -3,12 +3,13 @@ require 'set'
 module Settlers
   class Collector
     include Enumerable
+    include Observer
 
     def initialize
       @addresses = Set.new
     end
 
-    def update(address)
+    def server_exists_at(address)
       @addresses.add(address)
     end
 
