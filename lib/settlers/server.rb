@@ -15,10 +15,6 @@ module Settlers
       notify_observers :server_exists_at, @address
 
       sleep 5
-
-      %w(Leonardo Humperdink Elwood).each do |name|
-        Java.robot.start(@address.host, @address.port, name, '')
-      end
     end
 
     private

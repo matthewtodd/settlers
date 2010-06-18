@@ -4,10 +4,6 @@ module Settlers
       new('soc.server.SOCServer')
     end
 
-    def self.robot
-      new('soc.robot.SOCRobotClient')
-    end
-
     def self.client
       new('soc.client.SOCPlayerClient')
     end
