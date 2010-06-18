@@ -19,20 +19,23 @@ module Settlers
           @server     = NullObject.new
         end
 
-        opts.on('-s', '--server[=PORT]', Integer, 'Launch, announce, and connect to a server.', "  (PORT defaults to #{DEFAULT_PORT}.)") do |port|
+        opts.on('-s', '--server[=PORT]', Integer, 'Launch, announce, and connect to a server.', ". PORT defaults to #{DEFAULT_PORT}.") do |port|
           @announcer  = Bonjour.new
           @discoverer = NullObject.new
           @server     = Server.new(port || DEFAULT_PORT)
         end
 
-        opts.separator ''
         opts.separator 'Defaults:'
         opts.separator "#{opts.summary_indent}#{@defaults.join(' ')}"
       end
     end
 
     def run(args)
-      @options.parse!(@defaults.dup.concat(args))
+      begin
+        @options.parse!(@defaults.dup.concat(args))
+      rescue OptionParser::ParseError
+        @options.abort($!)
+      end
 
       @server.add_observer(@announcer)
       @server.add_observer(@collector)
