@@ -13,8 +13,9 @@ module Settlers
       DNSSD.register!(address.name, TYPE, nil, address.port)
     end
 
-    def start
-      puts 'Looking for servers nearby...'
+    def start(timeout=5)
+      puts "Looking for servers for up to #{timeout} seconds..."
+
       DNSSD.browse(TYPE) do |browse|
         DNSSD.resolve(browse) do |reply|
           DNSSD.getaddrinfo!(reply.target, DNSSD::Service::IPv4) do |info|
@@ -23,6 +24,8 @@ module Settlers
           end
         end
       end
+
+      sleep timeout
     end
 
     def DNSSD.getaddrinfo!(*args, &block)

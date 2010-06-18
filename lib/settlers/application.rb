@@ -18,13 +18,14 @@ module Settlers
 
     def run(args)
       @options.parse(args)
-      @bonjour.add_observer(@collector)
-      @bonjour.start
 
       server = Server.new(PORT)
       server.add_observer(@bonjour)
       server.add_observer(@collector)
       server.start
+
+      @bonjour.add_observer(@collector)
+      @bonjour.start
 
       @ui.choose_server(@collector) do |address|
         Client.new(address).start

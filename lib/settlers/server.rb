@@ -1,5 +1,4 @@
 require 'observer'
-require 'socket'
 
 module Settlers
   class Server
@@ -13,8 +12,6 @@ module Settlers
       Java.server.start(@address.port, 10, 'root', '')
       changed
       notify_observers :server_exists_at, @address
-
-      sleep 5
     end
 
     private
