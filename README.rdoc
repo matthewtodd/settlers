@@ -4,7 +4,7 @@ Play Settlers of Catan on your computer. You know you want to.
 
 All the hard work here was part of Robb Thomas'
 JSettlers[http://jsettlers.sf.net] project, and then the follow-on
-JSettlers2[http://settler2.sf.net]. I just wrapped all their code with a handy
+JSettlers2[http://jsettlers2.sf.net]. I just wrapped all their code with a handy
 shell script, adding basic Bonjour support.
 
 == Behold
