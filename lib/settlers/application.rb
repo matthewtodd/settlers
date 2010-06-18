@@ -1,3 +1,5 @@
+require 'optparse/defaults'
+
 module Settlers
   class Application
     DEFAULT_PORT = 7777
@@ -6,10 +8,11 @@ module Settlers
       @collector = Collector.new
       @ui        = UI.new
 
-      @defaults = %w(--server)
-
       @options = OptionParser.new do |opts|
+        opts.extend(OptionParser::Defaults)
+
         opts.banner  = "Usage: #{File.basename($0)} [--client]"
+        opts.defaults = %w(--server)
         opts.separator ''
         opts.version = Settlers::VERSION
 
@@ -24,18 +27,11 @@ module Settlers
           @discoverer = NullObject.new
           @server     = Server.new(port || DEFAULT_PORT)
         end
-
-        opts.separator 'Defaults:'
-        opts.separator "#{opts.summary_indent}#{@defaults.join(' ')}"
       end
     end
 
     def run(args)
-      begin
-        @options.parse!(@defaults.dup.concat(args))
-      rescue OptionParser::ParseError
-        @options.abort($!)
-      end
+      @options.order(args)
 
       @server.add_observer(@announcer)
       @server.add_observer(@collector)
