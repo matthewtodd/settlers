@@ -28,7 +28,7 @@ module Settlers
       sleep timeout
     end
 
-    def DNSSD.getaddrinfo!(*args, &block)
+    def DNSSD.getaddrinfo!(*args, &block) #:nodoc:
       run(DNSSD::Service.new, :getaddrinfo, *args, &block)
     end
   end

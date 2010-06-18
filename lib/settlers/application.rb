@@ -48,7 +48,7 @@ module Settlers
 
     private
 
-    class NullObject
+    class NullObject #:nodoc:
       def add_observer(observer)
       end
 
