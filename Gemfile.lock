@@ -3,7 +3,11 @@ dependencies:
   shoe: 
     group: 
     - :development
-    version: ">= 0"
+    version: ~> 0.6.2
+  optparse-defaults: 
+    group: 
+    - :default
+    version: ~> 0.1.0
   highline: 
     group: 
     - :default
@@ -23,9 +27,11 @@ specs:
     version: 1.5.2
 - launchy: 
     version: 0.3.5
+- optparse-defaults: 
+    version: 0.1.0
 - shoe: 
     version: 0.6.2
-hash: f27bf619789f011f74b6b3a5a3190ff567283249
+hash: 1c80df4c3d1ed318e70ea9186ec8bf34e9aed9b1
 sources: 
 - Rubygems: 
     uri: http://rubygems.org/
