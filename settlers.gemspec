@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name    = 'settlers'
   spec.version = Settlers::VERSION
 
-  spec.summary = "Provides a simple command-line executable for playing Robb Thomas' JSettlers game."
+  spec.summary = "Robb Thomas' JSettlers game, wrapped up in a Ruby script with Bonjour support."
 
   spec.author = 'Matthew Todd'
   spec.email  = 'matthew.todd@gmail.com'
