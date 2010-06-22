@@ -3,7 +3,7 @@ require 'rbconfig'
 require 'rbconfig/datadir'
 
 module Settlers
-  VERSION = '0.3.0'
+  VERSION = '0.3.1'
 
   autoload :Address,     'settlers/address'
   autoload :Application, 'settlers/application'
