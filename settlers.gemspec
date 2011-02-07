@@ -16,7 +16,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency     'dnssd',             '~> 1.3.1'
   spec.add_runtime_dependency     'highline',          '~> 1.5.2'
   spec.add_runtime_dependency     'optparse-defaults', '~> 0.1.0'
-  spec.add_development_dependency 'shoe',              '~> 0.6.2'
+  spec.add_development_dependency 'shoe',              '~> 0.7.1'
 
   # The kooky &File.method(:basename) trick keeps us from accidentally
   # shadowing a variable named "file" in the context that evaluates this
