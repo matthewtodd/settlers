@@ -1,6 +1,7 @@
 require 'pathname'
-require 'rbconfig'
-require 'rbconfig/datadir'
+# We need rubygems for Gem.datadir, since RbConfig.datadir has been deprecated.
+# Feels like a step backwards?
+require 'rubygems'
 
 module Settlers
   VERSION = '0.3.1'
@@ -16,13 +17,6 @@ module Settlers
   autoload :UI,          'settlers/ui'
 
   def self.datadir
-    @@datadir ||= begin
-      datadir = RbConfig.datadir('settlers')
-      if !File.exist?(datadir)
-        warn "#{datadir} does not exist. Trying again with data directory relative to __FILE__."
-        datadir = File.expand_path('../../data/settlers', __FILE__)
-      end
-      Pathname.new(datadir)
-    end
+    Pathname.new(Gem.datadir('settlers'))
   end
 end
