@@ -1,3 +1,4 @@
+require 'etc'
 require 'observer'
 
 module Settlers
