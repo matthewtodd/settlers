@@ -1,3 +1,6 @@
-require 'shoe'
+require 'bundler'
+Bundler::GemHelper.install_tasks
+Bundler.setup(:default, :development)
 
-Shoe::Tasks.define('settlers.gemspec')
+require 'shoe'
+Shoe.install_tasks
