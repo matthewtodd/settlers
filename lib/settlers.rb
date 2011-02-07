@@ -2,10 +2,9 @@ require 'pathname'
 # We need rubygems for Gem.datadir, since RbConfig.datadir has been deprecated.
 # Feels like a step backwards?
 require 'rubygems'
+require 'settlers/version'
 
 module Settlers
-  VERSION = '0.3.1'
-
   autoload :Address,     'settlers/address'
   autoload :Application, 'settlers/application'
   autoload :Bonjour,     'settlers/bonjour'
