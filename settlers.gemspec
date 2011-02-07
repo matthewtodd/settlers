@@ -1,4 +1,3 @@
-require 'bundler'
 $:.unshift File.expand_path('../lib', __FILE__)
 require 'settlers'
 
@@ -14,7 +13,10 @@ Gem::Specification.new do |spec|
   spec.homepage = 'http://github.com/matthewtodd/settlers'
 
   spec.requirements = ['java']
-  spec.add_bundler_dependencies
+  spec.add_runtime_dependency     'dnssd',             '~> 1.3.1'
+  spec.add_runtime_dependency     'highline',          '~> 1.5.2'
+  spec.add_runtime_dependency     'optparse-defaults', '~> 0.1.0'
+  spec.add_development_dependency 'shoe',              '~> 0.6.2'
 
   # The kooky &File.method(:basename) trick keeps us from accidentally
   # shadowing a variable named "file" in the context that evaluates this
